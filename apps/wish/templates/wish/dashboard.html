@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Wish List</title>
+</head>
+<body>
+	<a href="/logout">Logout</a>
+	<h3>Success! Welcome, {{request.session.name}}!</h3>
+	<p style="color:green;"></p>
+	<h4>Your Wish List:</h4>
+	<table>
+		<tr>
+			<th>Item</th>
+			<th>Added by</th>
+			<th>Date Added</th>
+			<th>Action</th>
+		</tr>
+		{% for user in users %}
+			{% for wish in wishes %}
+				{% if user.id == request.session.id %}
+					<tr>
+						<td><a href="/wish_items/{{wish.id}}">{{wish.item}}</a></td>
+						<td>{{user.name}}</td>
+						<td>{{wish.created_at}}</td>
+						<td><a href="delete/{{wish.id}}">Remove from my Wishlist</a></td>
+					</tr>
+				{% endif %}
+			{% endfor %}	
+		{% endfor %}
+	</table>
+<!-- 	{% for user in users %}
+	{% for wish in wishes %}
+		{{wish.wishuserid.id}}
+		{{user.wishuserid}}
+	{%  endfor %}
+	{%  endfor %} -->
+	<h4>Other Users' Wish List</h4>
+	<table>
+		<tr>
+			<th>Item</th>
+			<th>Added by</th>
+			<th>Date Added</th>
+			<th>Action</th>
+		</tr>
+		{% for user in users %}
+			{% for wish in wishes %}
+				{% if user.id != request.session.id %}
+				<tr>
+					<td><a href="/wish_items/{{wish.id}}">{{wish.item}}</a></td>
+					<td>{{user.name}}</td>
+					<td>{{wish.created_at}}</td>
+					<td><a href="add/{{wish.id}}">Add to my Wishlist</a></td>
+				</tr>
+				{% endif %}
+			{%  endfor %}
+		{%  endfor %}	</table>
+	<a href="wish_items/create">Add Item</a>
+</body>
+</html>

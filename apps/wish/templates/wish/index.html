@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login and Reg Home</title>
+</head>
+<body>
+	{% for message in messages %}
+    	<p style="background-color:red;">{{message}}</p>
+  	{% endfor %}
+	<h3>Registration</h3>
+	<form action="register" method="post">
+		{% csrf_token %}
+		Name:<input type="text" name="name">
+		Username:<input type="text" name="user">
+		Password:<input type="text" name="passw">
+		Confirm pw:<input type="text" name="confirm">
+		Date Hired: 
+			<input name="day" type="tel" maxlength="2" placeholder="DD"/> /
+    		<input name="month" type="tel" maxlength="2" placeholder="MM"/> /
+    		<input name="year" type="tel" maxlength="4" placeholder="YYYY" />
+		<input type="submit" name="Register" value="Register">
+	</form>
+	<h3>Login</h3>
+	<form action="login" method="post">
+		{% csrf_token %}
+		Username:<input type="text" name="username">
+		Password:<input type="text" name="password">
+		<input type="submit" name="login" value="Login">
+	</form>
+</body>
+</html>

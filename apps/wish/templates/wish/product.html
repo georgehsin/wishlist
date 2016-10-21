@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% for product in products %}
+	<title>{{product.item}}</title>
+	{% endfor %}
+</head>
+<body>
+	<a href="/logout">Logout</a>
+	<a href="/home">Home</a>
+	{% for product in products %}
+		{%if product.id == productid.id %}
+		<h2>{{product.item}}</h2>
+		{% endif %}
+	{% endfor %}
+	<p>Users who added this product/item under their wish list:</p>
+	{% for user in users %}
+	{% for product in products %}
+	<p>{{user.name}}</p>
+	{% endfor %}
+	{% endfor %}
+</body>
+</html>
